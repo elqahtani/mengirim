@@ -1,0 +1,75 @@
+---
+import Button from '../Button.astro';
+
+const painPoints = [
+  'Chat WhatsApp, Instagram, dan Messenger terpisah, ribet bolak-balik.',
+  'Tim CS kewalahan handle banyak channel sekaligus.',
+  'Data pelanggan tersebar, susah di-track.',
+];
+---
+
+<section id="hero" class="relative overflow-hidden pt-16 pb-20 md:pt-24 md:pb-32">
+  <div class="absolute inset-0 -z-10 pointer-events-none">
+    <div class="absolute inset-0 bg-gradient-to-b from-brand-50/60 via-white to-white"></div>
+    <div class="absolute -top-24 -left-24 h-72 w-72 rounded-full bg-brand-300/30 blur-3xl"></div>
+    <div class="absolute -top-10 right-0 h-80 w-80 rounded-full bg-accent-300/30 blur-3xl"></div>
+  </div>
+
+  <div class="container-mx">
+    <div class="mx-auto max-w-4xl text-center">
+      <div class="reveal inline-flex items-center gap-2 rounded-full border border-brand-200 bg-white px-4 py-1.5 text-xs font-semibold text-brand-700 shadow-sm">
+        <span class="relative flex h-2 w-2">
+          <span class="absolute inline-flex h-full w-full animate-ping rounded-full bg-brand-400 opacity-75"></span>
+          <span class="relative inline-flex h-2 w-2 rounded-full bg-brand-500"></span>
+        </span>
+        Omnichannel CRM untuk bisnis Indonesia
+      </div>
+
+      <h1
+        class="reveal mt-6 text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-extrabold tracking-tight leading-[1.05] text-slate-900"
+      >
+        Kelola <span class="text-gradient">WhatsApp</span>, <span class="text-gradient">Instagram</span> &
+        <span class="text-gradient">Messenger</span> dalam Satu Platform
+      </h1>
+
+      <p class="reveal mt-6 text-base md:text-lg lg:text-xl text-slate-600 leading-relaxed max-w-2xl mx-auto">
+        Bisnis kamu punya banyak channel komunikasi? WhatsApp, Instagram DM, FB Messenger, semuanya berantakan? Saatnya satukan semuanya.
+      </p>
+
+      <ul class="reveal mt-8 space-y-3 text-left max-w-xl mx-auto">
+        {
+          painPoints.map((point) => (
+            <li class="flex items-start gap-3">
+              <span class="mt-0.5 inline-flex h-6 w-6 flex-none items-center justify-center rounded-full bg-brand-100 text-brand-700">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-3.5 w-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                  <path d="M20 6L9 17l-5-5" />
+                </svg>
+              </span>
+              <span class="text-sm md:text-base text-slate-700">{point}</span>
+            </li>
+          ))
+        }
+      </ul>
+
+      <p class="reveal mt-8 text-base md:text-lg font-medium text-slate-800">
+        Hasilnya? Respon lambat, pelanggan kabur. Bisnis kehilangan peluang setiap hari. <span aria-hidden="true">😵</span>
+      </p>
+
+      <div class="reveal mt-10 flex flex-col sm:flex-row items-center justify-center gap-3">
+        <Button href="https://app.mengirim.id/register" variant="primary" size="lg">
+          Mulai Gratis Sekarang
+          <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <path d="M5 12h14M13 5l7 7-7 7" />
+          </svg>
+        </Button>
+        <Button href="#tech-provider" variant="secondary" size="lg">
+          Lihat Solusinya
+        </Button>
+      </div>
+
+      <p class="reveal mt-5 text-xs text-slate-500">
+        Gak perlu kartu kredit • Setup dalam 5 menit • Mulai dari Rp25 ribu
+      </p>
+    </div>
+  </div>
+</section>

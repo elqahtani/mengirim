@@ -1,0 +1,76 @@
+---
+import Logo from './Logo.astro';
+
+const year = new Date().getFullYear();
+---
+
+<footer class="border-t border-slate-200 bg-slate-50">
+  <div class="container-mx py-14 md:py-20">
+    <div class="grid grid-cols-1 md:grid-cols-4 gap-10 md:gap-8">
+      <div class="md:col-span-2">
+        <Logo size="lg" />
+        <p class="mt-4 max-w-sm text-sm text-slate-600 leading-relaxed">
+          Omnichannel CRM untuk WhatsApp, Instagram, dan Facebook Messenger. Dibangun untuk bisnis Indonesia.
+        </p>
+
+        <div class="mt-6 inline-flex items-center gap-3 rounded-xl border border-slate-200 bg-white px-4 py-2.5">
+          <span class="inline-flex h-8 w-8 items-center justify-center rounded-lg bg-brand-gradient text-white">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+              <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77 5.82 21l1.18-6.88-5-4.87 6.91-1.01L12 2z"/>
+            </svg>
+          </span>
+          <div class="text-xs">
+            <div class="font-semibold text-slate-900">Meta Business Partner</div>
+            <div class="text-slate-500">Authorized WhatsApp Business API</div>
+          </div>
+        </div>
+      </div>
+
+      <div>
+        <h4 class="text-sm font-bold text-slate-900 mb-4">Resources</h4>
+        <ul class="space-y-3">
+          <li>
+            <a href="https://docs.mengirim.id" class="text-sm text-slate-600 hover:text-brand-700 transition-colors">
+              Dokumentasi
+            </a>
+          </li>
+          <li>
+            <a href="https://app.mengirim.id" class="text-sm text-slate-600 hover:text-brand-700 transition-colors">
+              Dashboard
+            </a>
+          </li>
+          <li>
+            <a href="mailto:support@mengirim.id" class="text-sm text-slate-600 hover:text-brand-700 transition-colors">
+              support@mengirim.id
+            </a>
+          </li>
+        </ul>
+      </div>
+
+      <div>
+        <h4 class="text-sm font-bold text-slate-900 mb-4">Legal</h4>
+        <ul class="space-y-3">
+          <li>
+            <a href="/privacy-policy" class="text-sm text-slate-600 hover:text-brand-700 transition-colors">
+              Privacy Policy
+            </a>
+          </li>
+          <li>
+            <a href="/terms" class="text-sm text-slate-600 hover:text-brand-700 transition-colors">
+              Terms of Service
+            </a>
+          </li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="mt-12 flex flex-col md:flex-row items-start md:items-center justify-between gap-4 border-t border-slate-200 pt-8">
+      <p class="text-xs text-slate-500">
+        © {year} mengirim.id — Dioperasikan oleh PT Mengirim Digital Nusantara
+      </p>
+      <p class="text-xs text-slate-500 inline-flex items-center gap-1">
+        Made with <span class="text-red-500" aria-label="cinta">♥️</span> in Indonesia
+      </p>
+    </div>
+  </div>
+</footer>

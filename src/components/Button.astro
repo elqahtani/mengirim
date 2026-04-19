@@ -1,0 +1,48 @@
+---
+export interface Props {
+  href?: string;
+  variant?: 'primary' | 'secondary' | 'ghost';
+  size?: 'md' | 'lg';
+  class?: string;
+  target?: string;
+  rel?: string;
+  type?: 'button' | 'submit';
+  ariaLabel?: string;
+}
+
+const {
+  href,
+  variant = 'primary',
+  size = 'md',
+  class: className = '',
+  target,
+  rel,
+  type = 'button',
+  ariaLabel,
+} = Astro.props;
+
+const variants = {
+  primary: 'btn-primary',
+  secondary: 'btn-secondary',
+  ghost: 'btn-ghost',
+};
+
+const sizes = {
+  md: 'px-5 py-3 text-sm',
+  lg: 'px-7 py-4 text-base',
+};
+
+const classes = `${variants[variant]} ${sizes[size]} ${className}`;
+---
+
+{
+  href ? (
+    <a href={href} class={classes} target={target} rel={rel} aria-label={ariaLabel}>
+      <slot />
+    </a>
+  ) : (
+    <button type={type} class={classes} aria-label={ariaLabel}>
+      <slot />
+    </button>
+  )
+}

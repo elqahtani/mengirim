@@ -1,0 +1,116 @@
+---
+import '../styles/global.css';
+
+export interface Props {
+  title?: string;
+  description?: string;
+  canonical?: string;
+  ogImage?: string;
+  noindex?: boolean;
+}
+
+const {
+  title = 'mengirim.id - Omnichannel CRM WhatsApp & Instagram dalam Satu Platform',
+  description = 'Satukan WhatsApp, Instagram, dan FB Messenger dalam satu dashboard. Mulai dari Rp25 ribu. Setup dalam 5 menit.',
+  canonical,
+  ogImage = '/images/og-image.webp',
+  noindex = false,
+} = Astro.props;
+
+const siteUrl = 'https://mengirim.id';
+const canonicalUrl = canonical ?? new URL(Astro.url.pathname, siteUrl).toString();
+const ogImageUrl = new URL(ogImage, siteUrl).toString();
+
+const orgJsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'Organization',
+  name: 'mengirim.id',
+  legalName: 'PT Mengirim Digital Nusantara',
+  url: 'https://mengirim.id',
+  logo: 'https://mengirim.id/images/logo.webp',
+  sameAs: ['https://app.mengirim.id', 'https://docs.mengirim.id'],
+  contactPoint: {
+    '@type': 'ContactPoint',
+    email: 'support@mengirim.id',
+    contactType: 'customer support',
+    areaServed: 'ID',
+    availableLanguage: ['Indonesian', 'English'],
+  },
+  address: {
+    '@type': 'PostalAddress',
+    addressCountry: 'ID',
+  },
+};
+---
+
+<!doctype html>
+<html lang="id">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="generator" content={Astro.generator} />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="canonical" href={canonicalUrl} />
+    {noindex && <meta name="robots" content="noindex, nofollow" />}
+
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    <meta name="theme-color" content="#4F46E5" />
+    <meta name="author" content="PT Mengirim Digital Nusantara" />
+
+    <!-- Open Graph -->
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="mengirim.id" />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={canonicalUrl} />
+    <meta property="og:image" content={ogImageUrl} />
+    <meta property="og:locale" content="id_ID" />
+
+    <!-- Twitter -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={ogImageUrl} />
+
+    <!-- Preconnect -->
+    <link rel="preconnect" href="https://app.mengirim.id" />
+
+    <script type="application/ld+json" set:html={JSON.stringify(orgJsonLd)} is:inline />
+  </head>
+  <body class="min-h-screen antialiased">
+    <a
+      href="#main"
+      class="sr-only focus:not-sr-only focus:fixed focus:top-4 focus:left-4 focus:z-50 focus:rounded-lg focus:bg-white focus:px-4 focus:py-2 focus:text-sm focus:font-semibold focus:shadow-lg"
+    >
+      Lewati ke konten
+    </a>
+
+    <slot />
+
+    <script is:inline>
+      // Scroll reveal — lightweight Intersection Observer
+      (function () {
+        if (typeof window === 'undefined') return;
+        const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+        const elements = document.querySelectorAll('.reveal');
+        if (reduceMotion || !('IntersectionObserver' in window)) {
+          elements.forEach((el) => el.classList.add('is-visible'));
+          return;
+        }
+        const io = new IntersectionObserver(
+          (entries) => {
+            entries.forEach((entry) => {
+              if (entry.isIntersecting) {
+                entry.target.classList.add('is-visible');
+                io.unobserve(entry.target);
+              }
+            });
+          },
+          { threshold: 0.12, rootMargin: '0px 0px -40px 0px' }
+        );
+        elements.forEach((el) => io.observe(el));
+      })();
+    </script>
+  </body>
+</html>

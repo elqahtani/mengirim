@@ -1,0 +1,35 @@
+---
+import Section from '../Section.astro';
+import BenefitCard from '../BenefitCard.astro';
+
+const benefits = [
+  {
+    title: 'Satu Nomor, Dua Akses',
+    description: 'Pakai nomor yang sama di WhatsApp Business App dan WhatsApp Business API secara bersamaan. Gak perlu pilih salah satu.',
+  },
+  {
+    title: 'Chat History Tetap Aman',
+    description: 'Semua riwayat chat kamu tetap utuh. Transisi ke API gak akan menghapus percakapan yang sudah ada.',
+  },
+  {
+    title: 'Transisi Tanpa Gangguan',
+    description: 'Upgrade ke API tanpa uninstall aplikasi, tanpa downtime. Tim CS tetap bisa jalan seperti biasa.',
+  },
+  {
+    title: 'Real-time Sync',
+    description: 'Pesan masuk di aplikasi maupun dashboard tersinkronisasi otomatis. Tim kamu selalu punya info terkini.',
+  },
+];
+---
+
+<Section
+  id="coexistence"
+  eyebrow="Fitur Terbaru"
+  title="WhatsApp <span class='text-gradient'>Coexistence</span>"
+  subtitle="Fitur terbaru dari Meta yang bikin transisi ke API jadi tanpa ribet. Sekarang kamu <strong>gak perlu uninstall</strong> WhatsApp Business App untuk pakai API. Cukup sambungkan, dan semuanya jalan berdampingan."
+  background="white"
+>
+  <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-5 max-w-6xl mx-auto">
+    {benefits.map((b, i) => <BenefitCard title={b.title} description={b.description} number={i + 1} />)}
+  </div>
+</Section>

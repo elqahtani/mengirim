@@ -1,0 +1,57 @@
+---
+export interface Props {
+  id?: string;
+  class?: string;
+  eyebrow?: string;
+  title?: string;
+  subtitle?: string;
+  align?: 'left' | 'center';
+  background?: 'white' | 'slate' | 'gradient';
+}
+
+const {
+  id,
+  class: className = '',
+  eyebrow,
+  title,
+  subtitle,
+  align = 'center',
+  background = 'white',
+} = Astro.props;
+
+const bg = {
+  white: 'bg-white',
+  slate: 'bg-slate-50',
+  gradient: 'bg-gradient-to-b from-white via-brand-50/40 to-white',
+}[background];
+
+const alignClass = align === 'center' ? 'text-center mx-auto' : 'text-left';
+const maxW = align === 'center' ? 'max-w-3xl' : 'max-w-4xl';
+---
+
+<section id={id} class={`relative py-20 md:py-32 ${bg} ${className}`}>
+  <div class="container-mx">
+    {
+      (eyebrow || title || subtitle) && (
+        <div class={`reveal ${alignClass} ${maxW} mb-14 md:mb-20`}>
+          {eyebrow && (
+            <div class="inline-flex items-center gap-2 rounded-full border border-brand-200 bg-brand-50 px-3 py-1 text-xs font-semibold uppercase tracking-wider text-brand-700 mb-4">
+              {eyebrow}
+            </div>
+          )}
+          {title && (
+            <h2 class="text-3xl md:text-4xl lg:text-5xl font-extrabold tracking-tight text-slate-900 leading-[1.15]">
+              <Fragment set:html={title} />
+            </h2>
+          )}
+          {subtitle && (
+            <p class="mt-5 text-base md:text-lg text-slate-600 leading-relaxed">
+              <Fragment set:html={subtitle} />
+            </p>
+          )}
+        </div>
+      )
+    }
+    <slot />
+  </div>
+</section>

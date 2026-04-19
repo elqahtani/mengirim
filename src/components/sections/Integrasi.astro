@@ -1,0 +1,35 @@
+---
+import Section from '../Section.astro';
+import BenefitCard from '../BenefitCard.astro';
+
+const benefits = [
+  {
+    title: 'Satu Dashboard',
+    description: 'Semua channel Meta kamu — WhatsApp, Instagram, dan Messenger — dalam satu layar. Gak perlu buka aplikasi terpisah.',
+  },
+  {
+    title: 'Unified Customer Profile',
+    description: 'Satu pelanggan, satu profil. Riwayat chat dari semua channel tercatat otomatis dan saling terhubung.',
+  },
+  {
+    title: 'Consistent Experience',
+    description: 'Tone, template, dan alur balasan konsisten di semua channel. Brand kamu terasa rapi di mana pun.',
+  },
+  {
+    title: 'Real-time Sync',
+    description: 'Pesan masuk, keluar, dan status terkirim ter-update secara real-time. Gak ada pesan yang terlewat.',
+  },
+];
+---
+
+<Section
+  id="integration"
+  eyebrow="Integrasi"
+  title="Integrasi <span class='text-gradient'>Seamless</span>"
+  subtitle="mengirim.id terintegrasi dengan WhatsApp Business API resmi, Instagram Graph API, dan Facebook Messenger API. Semua pesan masuk ke satu tempat."
+  background="slate"
+>
+  <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-5 max-w-6xl mx-auto">
+    {benefits.map((b, i) => <BenefitCard title={b.title} description={b.description} number={i + 1} />)}
+  </div>
+</Section>

@@ -1,0 +1,43 @@
+---
+import Section from '../Section.astro';
+
+const pillars = [
+  {
+    title: 'Setup cepat',
+    description: 'Langsung pakai dalam hitungan menit. Onboarding dipandu, konek channel tinggal klik.',
+    icon: `<svg xmlns="http://www.w3.org/2000/svg" class="h-7 w-7" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>`,
+  },
+  {
+    title: 'Support lokal',
+    description: 'Tim siap bantu dalam Bahasa Indonesia. Respon cepat, paham konteks bisnis lokal.',
+    icon: `<svg xmlns="http://www.w3.org/2000/svg" class="h-7 w-7" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/></svg>`,
+  },
+  {
+    title: 'Harga transparan',
+    description: 'Gak ada biaya tersembunyi. Mulai dari Rp25 ribu — jelas di depan, tanpa kejutan di akhir bulan.',
+    icon: `<svg xmlns="http://www.w3.org/2000/svg" class="h-7 w-7" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>`,
+  },
+];
+---
+
+<Section
+  id="services"
+  eyebrow="Kenapa Kami"
+  title="Kenapa Pilih <span class='text-gradient'>mengirim.id</span>?"
+  subtitle="Tiga alasan sederhana yang bikin tim CS kamu langsung cinta."
+  background="gradient"
+>
+  <div class="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-5xl mx-auto">
+    {
+      pillars.map((p) => (
+        <div class="reveal card text-center md:text-left">
+          <div class="mb-5 inline-flex h-14 w-14 items-center justify-center rounded-2xl bg-brand-gradient text-white shadow-glow mx-auto md:mx-0">
+            <Fragment set:html={p.icon} />
+          </div>
+          <h3 class="text-xl font-bold text-slate-900 mb-2">{p.title}</h3>
+          <p class="text-sm md:text-base text-slate-600 leading-relaxed">{p.description}</p>
+        </div>
+      ))
+    }
+  </div>
+</Section>
