@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://mengirim.id/sitemap-index.xml
+Sitemap: https://mengirim.id/sitemap.xml

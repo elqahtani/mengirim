@@ -1,0 +1,64 @@
+# Contoh konfigurasi nginx untuk mengirim.id
+# Taruh file ini di /etc/nginx/sites-available/mengirim.id lalu symlink ke sites-enabled
+# Upload isi folder dist/ ke /var/www/mengirim.id
+
+server {
+    listen 80;
+    listen [::]:80;
+    server_name mengirim.id www.mengirim.id;
+    return 301 https://mengirim.id$request_uri;
+}
+
+server {
+    listen 443 ssl http2;
+    listen [::]:443 ssl http2;
+    server_name mengirim.id;
+
+    root /var/www/mengirim.id;
+    index index.html;
+
+    # SSL (pakai certbot / Let's Encrypt)
+    ssl_certificate     /etc/letsencrypt/live/mengirim.id/fullchain.pem;
+    ssl_certificate_key /etc/letsencrypt/live/mengirim.id/privkey.pem;
+    ssl_protocols TLSv1.2 TLSv1.3;
+    ssl_prefer_server_ciphers on;
+
+    # Security headers
+    add_header X-Content-Type-Options "nosniff" always;
+    add_header X-Frame-Options "DENY" always;
+    add_header Referrer-Policy "strict-origin-when-cross-origin" always;
+    add_header Permissions-Policy "camera=(), microphone=(), geolocation=()" always;
+    add_header Strict-Transport-Security "max-age=31536000; includeSubDomains" always;
+
+    # Gzip
+    gzip on;
+    gzip_vary on;
+    gzip_min_length 1024;
+    gzip_types text/plain text/css text/xml application/json application/javascript application/xml+rss application/xhtml+xml image/svg+xml;
+
+    # Cache assets panjang (hash sudah ada di nama file)
+    location /_astro/ {
+        expires 1y;
+        add_header Cache-Control "public, immutable";
+        access_log off;
+    }
+
+    location /images/ {
+        expires 1y;
+        add_header Cache-Control "public, immutable";
+        access_log off;
+    }
+
+    location = /favicon.svg {
+        expires 7d;
+        access_log off;
+    }
+
+    # Pretty URL — /terms → /terms/index.html, tanpa trailing slash di browser
+    location / {
+        try_files $uri $uri/index.html $uri/ =404;
+    }
+
+    # 404 fallback
+    error_page 404 /index.html;
+}

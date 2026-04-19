@@ -86,6 +86,45 @@ Landing page punya fallback graceful kalau file belum ada — aman untuk dev.
 
 ## Deploy
 
+Output Astro adalah **pure static HTML** (di folder `dist/`). Bisa di-host di mana aja — server sendiri, Vercel, Netlify, GitHub Pages, Cloudflare Pages, S3+CloudFront, dll.
+
+### Self-hosted (server sendiri)
+
+Output `npm run build` → folder `dist/` isinya HTML, CSS, JS, font. Gak butuh Node runtime di server.
+
+```bash
+# 1. Build lokal
+npm run build
+
+# 2. Upload ke server (pilih salah satu)
+rsync -avz --delete dist/ user@server:/var/www/mengirim.id/
+# atau pakai scp, sftp, CI/CD, dll.
+```
+
+Config web server example tersedia di folder `deploy/`:
+
+- **nginx** → `deploy/nginx.conf.example`
+- **Caddy** → `deploy/Caddyfile.example` (auto HTTPS via Let's Encrypt)
+
+Quick start nginx:
+
+```bash
+# Di server:
+sudo cp deploy/nginx.conf.example /etc/nginx/sites-available/mengirim.id
+sudo ln -s /etc/nginx/sites-available/mengirim.id /etc/nginx/sites-enabled/
+sudo certbot --nginx -d mengirim.id -d www.mengirim.id
+sudo nginx -t && sudo systemctl reload nginx
+```
+
+Quick start Caddy:
+
+```bash
+# Di server:
+sudo cp deploy/Caddyfile.example /etc/caddy/Caddyfile
+sudo systemctl reload caddy
+# HTTPS cert otomatis — no extra step
+```
+
 ### Vercel
 
 1. Push repo ke GitHub/GitLab/Bitbucket.

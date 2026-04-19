@@ -1,0 +1,27 @@
+# Contoh Caddyfile untuk mengirim.id
+# Caddy handle HTTPS otomatis via Let's Encrypt
+# Upload isi folder dist/ ke /var/www/mengirim.id
+
+mengirim.id {
+    root * /var/www/mengirim.id
+    file_server
+    try_files {path} {path}/index.html {path}/ =404
+
+    encode gzip zstd
+
+    header {
+        X-Content-Type-Options "nosniff"
+        X-Frame-Options "DENY"
+        Referrer-Policy "strict-origin-when-cross-origin"
+        Permissions-Policy "camera=(), microphone=(), geolocation=()"
+        Strict-Transport-Security "max-age=31536000; includeSubDomains"
+        -Server
+    }
+
+    @assets path /_astro/* /images/*
+    header @assets Cache-Control "public, max-age=31536000, immutable"
+}
+
+www.mengirim.id {
+    redir https://mengirim.id{uri} permanent
+}
